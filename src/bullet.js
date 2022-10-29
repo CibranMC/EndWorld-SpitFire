@@ -7,7 +7,7 @@ class Bullet {
         this.width = 20
         this.height = 10
 
-        this.velX = 20
+        this.velX = 15
 
     }
     draw() {

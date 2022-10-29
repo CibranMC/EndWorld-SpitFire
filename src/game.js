@@ -11,6 +11,7 @@ const Game = {
     height: undefined,
     width: undefined,
     intervalId: undefined,
+    framesCounter: 0,
 
     plane: undefined,
     meteorites: undefined,
@@ -39,6 +40,8 @@ const Game = {
         this.intervalId = setInterval(() => {
             this.clearAll()
             this.drawAll()
+            this.framesCounter++
+            if (this.framesCounter % 10 === 0) this.plane.cooldown++
         }, 1000 / this.FPS)
     },
 
@@ -47,8 +50,8 @@ const Game = {
     },
 
     drawAll() {
-        this.plane.draw()
         this.plane.bullets.forEach(bullet => bullet.draw());
+        this.plane.draw()
     },
 
     clearAll() {
