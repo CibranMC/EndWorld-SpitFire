@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+.start {
+    border: 1px solid black;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.difficulty {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.non-display {
+    display: none
+}
