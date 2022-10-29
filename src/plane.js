@@ -12,6 +12,8 @@ class Plane {
 
         this.pixelSetting = 4
 
+        this.bullets = []
+
         this.init()
     }
 
@@ -42,6 +44,13 @@ class Plane {
                 if (this.posX < (this.ctxWidth / 2) - this.width)
                     this.posX += 10
             }
+            if (e.code === "Space") {
+                this.shoot()
+            }
         })
+    }
+
+    shoot() {
+        this.bullets.push(new Bullet(this.ctx, this.posX, this.posY, this.width, this.height))
     }
 }

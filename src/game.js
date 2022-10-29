@@ -48,10 +48,12 @@ const Game = {
 
     drawAll() {
         this.plane.draw()
+        this.plane.bullets.forEach(bullet => bullet.draw());
     },
 
     clearAll() {
         this.ctx.clearRect(0, 0, this.width, this.height)
     }
+
 
 }
