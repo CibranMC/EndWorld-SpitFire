@@ -10,7 +10,7 @@ const Game = {
     ctx: undefined,
     height: undefined,
     width: undefined,
-    interval: undefined,
+    intervalId: undefined,
 
     plane: undefined,
     meteorites: undefined,
@@ -35,6 +35,23 @@ const Game = {
 
     start() {
 
+        this.generateAll()
+        this.intervalId = setInterval(() => {
+            this.clearAll()
+            this.drawAll()
+        }, 1000 / this.FPS)
     },
+
+    generateAll() {
+        this.plane = new Plane(this.ctx, this.width, this.height)
+    },
+
+    drawAll() {
+        this.plane.draw()
+    },
+
+    clearAll() {
+        this.ctx.clearRect(0, 0, this.width, this.height)
+    }
 
 }
