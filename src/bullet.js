@@ -10,6 +10,7 @@ class Bullet {
         this.velX = 15
 
     }
+
     draw() {
         this.ctx.fillStyle = "blue"
         this.ctx.fillRect(this.posX, this.posY, this.width, this.height)

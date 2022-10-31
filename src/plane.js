@@ -8,7 +8,7 @@ class Plane {
         this.height = 50
 
         this.posX = 100
-        this.posY = ctxHeight / 2 - 50
+        this.posY = ctxHeight / 2 - this.height
 
         this.pixelSetting = 4
 
@@ -20,6 +20,7 @@ class Plane {
             downKeyPressed: false,
             leftKeyPressed: false,
             rightKeyPressed: false,
+            spaceKeyPressed: false,
         }
 
         this.bullets = []
@@ -41,38 +42,44 @@ class Plane {
         if (this.downKeyPressed) this.moveDown()
         if (this.leftKeyPressed) this.moveLeft()
         if (this.rightKeyPressed) this.moveRight()
+        if (this.spaceKeyPressed) this.shoot()
     }
 
     setEventListeners() {
-        document.addEventListener("keydown", (e) => {
-            if (e.code === "ArrowUp" || e.code === "KeyW") {
+
+        document.addEventListener("keydown", ({ code }) => {
+            if (code === "ArrowUp" || code === "KeyW") {
                 this.upKeyPressed = true
             }
-            if (e.code === "ArrowDown" || e.code === "KeyS") {
+            if (code === "ArrowDown" || code === "KeyS") {
                 this.downKeyPressed = true
             }
-            if (e.code === "ArrowLeft" || e.code === "KeyA") {
+            if (code === "ArrowLeft" || code === "KeyA") {
                 this.leftKeyPressed = true
             }
-            if (e.code === "ArrowRight" || e.code === "KeyD") {
+            if (code === "ArrowRight" || code === "KeyD") {
                 this.rightKeyPressed = true
             }
-            if (e.code === "Space") {
-                this.shoot()
+            if (code === "Space") {
+                this.spaceKeyPressed = true
             }
         })
-        document.addEventListener("keyup", (e) => {
-            if (e.code === "ArrowUp" || e.code === "KeyW") {
+
+        document.addEventListener("keyup", ({ code }) => {
+            if (code === "ArrowUp" || code === "KeyW") {
                 this.upKeyPressed = false
             }
-            if (e.code === "ArrowDown" || e.code === "KeyS") {
+            if (code === "ArrowDown" || code === "KeyS") {
                 this.downKeyPressed = false
             }
-            if (e.code === "ArrowLeft" || e.code === "KeyA") {
+            if (code === "ArrowLeft" || code === "KeyA") {
                 this.leftKeyPressed = false
             }
-            if (e.code === "ArrowRight" || e.code === "KeyD") {
+            if (code === "ArrowRight" || code === "KeyD") {
                 this.rightKeyPressed = false
+            }
+            if (code === "Space") {
+                this.spaceKeyPressed = false
             }
         })
     }
@@ -86,11 +93,11 @@ class Plane {
     }
     moveRight() {
         if (this.posX < (this.ctxWidth / 2) - this.width)
-            this.posX += 5
+            this.posX += 10
     }
     moveLeft() {
         if (this.posX > 50)
-            this.posX -= 5
+            this.posX -= 7
     }
 
     shoot() {

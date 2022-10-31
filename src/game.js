@@ -14,10 +14,9 @@ const Game = {
     framesCounter: 0,
 
     plane: undefined,
-    meteorites: undefined,
+    meteorites: [],
+    obstacles: [],
     background: undefined,
-
-
 
     init() {
         this.canvas = document.querySelector("#canvas")
@@ -41,22 +40,26 @@ const Game = {
             this.clearAll()
             this.drawAll()
             this.framesCounter++
-            if (this.framesCounter % 10 === 0) this.plane.cooldown++
+            if (this.framesCounter % 30 === 0) this.plane.cooldown++
         }, 1000 / this.FPS)
     },
 
     generateAll() {
         this.plane = new Plane(this.ctx, this.width, this.height)
+        this.obstacle = new Obstacle(this.ctx, this.width, this.height)
     },
 
     drawAll() {
         this.plane.bullets.forEach(bullet => bullet.draw());
         this.plane.draw()
+        if (this.framesCounter % 120 === 0) {
+            this.obstacles.push(new Obstacle(this.ctx, this.width, this.height))
+        }
+        this.obstacles.forEach(obstacle => obstacle.draw())
     },
 
     clearAll() {
         this.ctx.clearRect(0, 0, this.width, this.height)
     }
-
 
 }
