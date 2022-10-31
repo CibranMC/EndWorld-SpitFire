@@ -7,10 +7,16 @@ body {
     overflow: hidden;
 }
 
-.start {
+.start,
+.reload {
     border: 1px solid black;
     padding: 10px 20px;
     cursor: pointer;
+    font-family: sans-serif;
+}
+
+.reload {
+    margin-top: 40px;
 }
 
 .difficulty {
@@ -21,6 +27,25 @@ body {
     justify-content: center;
 }
 
+.score-title,
+.score-points {
+    font-size: 50px;
+    font-family: sans-serif;
+    color: black;
+}
+
+.game-over {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .non-display {
-    display: none
+    display: none;
 }

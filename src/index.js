@@ -6,6 +6,7 @@ window.onload = () => {
     start.addEventListener('click', () => {
         menu.classList.toggle("non-display")
         canvas.classList.toggle("non-display")
+
         Game.init()
     })
 }

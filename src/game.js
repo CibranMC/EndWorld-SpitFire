@@ -12,11 +12,13 @@ const Game = {
     width: undefined,
     intervalId: undefined,
     framesCounter: 0,
+    score: 0,
 
     plane: undefined,
     meteorites: [],
     obstacles: [],
     background: undefined,
+
 
     init() {
         this.canvas = document.querySelector("#canvas")
@@ -42,7 +44,11 @@ const Game = {
             this.checkCollision()
             this.clearBullets()
             this.framesCounter++
-            if (this.framesCounter % 30 === 0) this.plane.cooldown++
+            if (this.framesCounter % 30 === 0) {
+                this.plane.cooldown++
+                this.score++
+            }
+            this.printScore()
         }, 1000 / this.FPS)
     },
 
@@ -79,14 +85,14 @@ const Game = {
             if (obstacle.posX + 24 < this.plane.posX + this.plane.width &&
                 obstacle.posX + obstacle.width > this.plane.posX + 24 &&
                 obstacle.posY - 10 < this.plane.posY + this.plane.height &&
-                obstacle.height + obstacle.posY > this.plane.posY + 10) console.log("Choco")
+                obstacle.height + obstacle.posY > this.plane.posY + 10) this.gameOver()
         })
 
         this.meteorites.forEach(meteorite => {
             if (meteorite.posX + 20 < this.plane.posX + this.plane.width &&
                 meteorite.posX + meteorite.width > this.plane.posX + 20 &&
                 meteorite.posY - 10 < this.plane.posY + this.plane.height &&
-                meteorite.height + meteorite.posY > this.plane.posY + 10) console.log("Choco")
+                meteorite.height + meteorite.posY > this.plane.posY + 10) this.gameOver()
         })
 
         this.plane.bullets.forEach((bullet, indexBullet, bullets) => {
@@ -97,6 +103,7 @@ const Game = {
                     meteorite.height + meteorite.posY > bullet.posY + 10) {
                     meteorites.splice(indexMeteorite, 1)
                     bullets.splice(indexBullet, 1)
+                    this.score += 10
                 }
             })
         })
@@ -108,7 +115,7 @@ const Game = {
                 items.splice(i, 1)
             }
         })
-        console.log(array)
+        //console.log(array)
     },
 
     clearBullets() {
@@ -117,7 +124,31 @@ const Game = {
                 bullets.splice(i, 1)
             }
         })
-        console.log(this.plane.bullets)
+        //console.log(this.plane.bullets)
     },
+
+    printScore() {
+        this.ctx.fillStyle = "black"
+        this.ctx.font = "35px sans-serif"
+        this.ctx.fillText(`Score: ${this.score}`, this.width - 250, 60)
+    },
+
+    gameOver() {
+        const gameOver = document.querySelector(".game-over")
+        const scorePoints = document.querySelector(".score-points")
+        const reload = document.querySelector(".reload")
+
+        clearInterval(this.intervalId)
+        this.clearAll()
+
+        scorePoints.innerHTML = `Score: ${this.score}`
+
+        gameOver.classList.toggle("non-display")
+        this.canvas.classList.toggle("non-display")
+
+        reload.addEventListener('click', () => {
+            location.reload()
+        })
+    }
 
 }
