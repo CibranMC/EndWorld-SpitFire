@@ -39,6 +39,9 @@ const Game = {
         this.intervalId = setInterval(() => {
             this.clearAll()
             this.drawAll()
+            this.checkCollision()
+            this.clearArray(this.obstacles)
+            this.clearBullets()
             this.framesCounter++
             if (this.framesCounter % 30 === 0) this.plane.cooldown++
         }, 1000 / this.FPS)
@@ -60,6 +63,31 @@ const Game = {
 
     clearAll() {
         this.ctx.clearRect(0, 0, this.width, this.height)
-    }
+    },
+
+    checkCollision() {
+        this.obstacles.forEach(obstacle => {
+            if (obstacle.posX + 30 < this.plane.posX + this.plane.width &&
+                obstacle.posX + obstacle.width > this.plane.posX + 30 &&
+                obstacle.posY - 10 < this.plane.posY + this.plane.height &&
+                obstacle.height + obstacle.posY > this.plane.posY + 10) console.log("Choco")
+        })
+    },
+
+    clearArray(array) {
+        array.forEach((item, i, items) => {
+            if (item.posX + item.width < 0) {
+                items.splice(i, 1)
+            }
+        })
+    },
+
+    clearBullets() {
+        this.plane.bullets.forEach((bullet, i, bullets) => {
+            if (bullet.posX > this.width) {
+                bullets.splice(i, 1)
+            }
+        })
+    },
 
 }
