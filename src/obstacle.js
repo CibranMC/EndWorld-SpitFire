@@ -10,7 +10,7 @@ class Obstacle {
         this.posX = ctxWidth
         this.posY = Math.random() * (ctxHeight - (this.height + 50))
 
-        this.velX = 20
+        this.velX = 14
     }
 
     randomHeight() {

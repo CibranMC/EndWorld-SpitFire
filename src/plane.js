@@ -83,18 +83,22 @@ class Plane {
             }
         })
     }
+
     moveUp() {
         if (this.posY > 0 + this.height)
             this.posY -= 10
     }
+
     moveDown() {
         if (this.posY < this.ctxHeight - (this.height * 2) - this.pixelSetting)
             this.posY += 10
     }
+
     moveRight() {
         if (this.posX < (this.ctxWidth / 2) - this.width)
             this.posX += 10
     }
+
     moveLeft() {
         if (this.posX > 50)
             this.posX -= 7
