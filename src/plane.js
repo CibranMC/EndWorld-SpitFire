@@ -1,5 +1,5 @@
 class Plane {
-    constructor(ctx, ctxWidth, ctxHeight) {
+    constructor(ctx, ctxWidth, ctxHeight, lives = 3) {
         this.ctx = ctx
         this.ctxWidth = ctxWidth
         this.ctxHeight = ctxHeight
@@ -14,6 +14,7 @@ class Plane {
 
         this.cooldown = 1
         this.canShoot = false
+        this.lives = lives
 
         this.keys = {
             upKeyPressed: false,

@@ -1,5 +1,5 @@
 class Obstacle {
-    constructor(ctx, ctxWidth, ctxHeight) {
+    constructor(ctx, ctxWidth, ctxHeight, velX = 14) {
         this.ctx = ctx
         this.ctxWidth = ctxWidth
         this.ctxHeight = ctxHeight
@@ -10,7 +10,7 @@ class Obstacle {
         this.posX = ctxWidth
         this.posY = Math.random() * (ctxHeight - (this.height + 50))
 
-        this.velX = 14
+        this.velX = velX
     }
 
     randomHeight() {

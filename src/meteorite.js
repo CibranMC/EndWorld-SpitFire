@@ -1,5 +1,5 @@
 class Meteorite {
-    constructor(ctx, ctxWidth, ctxHeight) {
+    constructor(ctx, ctxWidth, ctxHeight, velX = 10) {
         this.ctx = ctx
         this.ctxWidth = ctxWidth
         this.ctxHeight = ctxHeight
@@ -10,7 +10,7 @@ class Meteorite {
         this.posX = ctxWidth
         this.posY = Math.random() * (ctxHeight - (this.height + 50))
 
-        this.velX = 10
+        this.velX = velX
 
         this.planeImg = new Image()
         this.planeImg.src = "./assets/meteorito.png"

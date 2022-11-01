@@ -72,38 +72,63 @@ const Game = {
     },
 
     setAllElements() {
+
         if (this.framesCounter % 120 === 0) {
-            this.obstacles.push(new Obstacle(this.ctx, this.width, this.height))
+            this.obstacles.push(new Obstacle(this.ctx, this.width, this.height, this.obstacle.velX += 0.3))
         }
         if (this.framesCounter % 180 === 0) {
-            this.meteorites.push(new Meteorite(this.ctx, this.width, this.height))
+            this.meteorites.push(new Meteorite(this.ctx, this.width, this.height, this.meteorite.velX += 0.4))
         }
     },
 
     checkCollision() {
         this.obstacles.forEach(obstacle => {
-            if (obstacle.posX + 24 < this.plane.posX + this.plane.width &&
-                obstacle.posX + obstacle.width > this.plane.posX + 24 &&
+            if (obstacle.posX + 20 < this.plane.posX + this.plane.width &&
+                obstacle.posX + obstacle.width > this.plane.posX + 20 &&
                 obstacle.posY - 10 < this.plane.posY + this.plane.height &&
-                obstacle.height + obstacle.posY > this.plane.posY + 10) this.gameOver()
+                obstacle.height + obstacle.posY > this.plane.posY + 10) {
+                this.gameOver()
+                /*if (obstacle.posX + this.obstacle.velX >= this.plane.posX + this.plane.width &&
+                    obstacle.posX <= this.plane.posX + this.plane.width &&
+                    obstacle.posY - 10 < this.plane.posY + this.plane.height &&
+                    obstacle.height + obstacle.posY > this.plane.posY + 10) {*/
+                //this.plane.lives--
+                //console.log(this.plane.lives)
+                //if (this.plane.lives <= 0) {  }
+            }
         })
 
         this.meteorites.forEach(meteorite => {
             if (meteorite.posX + 20 < this.plane.posX + this.plane.width &&
                 meteorite.posX + meteorite.width > this.plane.posX + 20 &&
                 meteorite.posY - 10 < this.plane.posY + this.plane.height &&
-                meteorite.height + meteorite.posY > this.plane.posY + 10) this.gameOver()
+                meteorite.height + meteorite.posY > this.plane.posY + 10) {
+                this.gameOver()
+                //this.plane.lives--
+                //console.log(this.plane.lives)
+                //if (this.plane.lives <= 0) { }
+            }
         })
-
         this.plane.bullets.forEach((bullet, indexBullet, bullets) => {
             this.meteorites.forEach((meteorite, indexMeteorite, meteorites) => {
-                if (meteorite.posX + 25 < bullet.posX + bullet.width &&
-                    meteorite.posX + meteorite.width > bullet.posX + 25 &&
+                if (meteorite.posX + 5 < bullet.posX + bullet.width &&
+                    meteorite.posX + meteorite.width > bullet.posX + 5 &&
                     meteorite.posY - 10 < bullet.posY + bullet.height &&
                     meteorite.height + meteorite.posY > bullet.posY + 10) {
                     meteorites.splice(indexMeteorite, 1)
                     bullets.splice(indexBullet, 1)
                     this.score += 10
+                }
+            })
+        })
+
+        this.plane.bullets.forEach((bullet, indexBullet, bullets) => {
+            this.obstacles.forEach(obstacle => {
+                if (obstacle.posX - 1 < bullet.posX + bullet.width &&
+                    obstacle.posX + obstacle.width > bullet.posX - 1 &&
+                    obstacle.posY - 10 < bullet.posY + bullet.height &&
+                    obstacle.height + obstacle.posY > bullet.posY + 10) {
+                    bullets.splice(indexBullet, 1)
                 }
             })
         })
