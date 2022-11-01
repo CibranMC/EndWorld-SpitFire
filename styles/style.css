@@ -7,16 +7,19 @@ body {
     overflow: hidden;
 }
 
-.start,
-.reload {
+.easy,
+.hard,
+.reload-game-over,
+.reload-win-game {
     border: 1px solid black;
     padding: 10px 20px;
     cursor: pointer;
     font-family: sans-serif;
+    margin-top: 40px;
 }
 
-.reload {
-    margin-top: 40px;
+.easy {
+    margin-right: 20px;
 }
 
 .difficulty {
@@ -32,9 +35,11 @@ body {
     font-size: 50px;
     font-family: sans-serif;
     color: black;
+    text-align: center;
 }
 
-.game-over {
+.game-over,
+.win-game {
     position: absolute;
     width: 100vw;
     height: 100vh;

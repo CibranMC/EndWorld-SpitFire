@@ -1,5 +1,5 @@
 class Plane {
-    constructor(ctx, ctxWidth, ctxHeight, lives = 3) {
+    constructor(ctx, ctxWidth, ctxHeight, lives) {
         this.ctx = ctx
         this.ctxWidth = ctxWidth
         this.ctxHeight = ctxHeight
@@ -86,7 +86,7 @@ class Plane {
     }
 
     moveUp() {
-        if (this.posY > 0 + this.height)
+        if (this.posY > 50)
             this.posY -= 10
     }
 
