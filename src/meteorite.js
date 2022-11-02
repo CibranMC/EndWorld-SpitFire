@@ -12,12 +12,12 @@ class Meteorite {
 
         this.velX = velX
 
-        this.planeImg = new Image()
-        this.planeImg.src = "./assets/meteorito.png"
+        this.meteoriteImg = new Image()
+        this.meteoriteImg.src = "./assets/meteorito.png"
     }
 
     draw() {
-        this.ctx.drawImage(this.planeImg, this.posX, this.posY, this.width, this.height)
+        this.ctx.drawImage(this.meteoriteImg, this.posX, this.posY, this.width, this.height)
         this.move()
     }
 

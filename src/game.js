@@ -1,7 +1,7 @@
 const Game = {
     name: "EndWorld SpitFire",
     author: "Carlos Bustos Ramiro y Cibrán Meléndez Cabo",
-    version: "alpha",
+    version: "beta",
     license: undefined,
 
     FPS: 60,
@@ -10,16 +10,28 @@ const Game = {
     ctx: undefined,
     height: undefined,
     width: undefined,
+
     intervalId: undefined,
     framesCounter: 0,
     score: 0,
+
+    shootFrequency: 30,
+    scoreFinalBoss: 200,
+    invulnerable: 0,
+    slowDown: 0,
+    quickShoot: 0,
 
     plane: undefined,
     boss: undefined,
     meteorites: [],
     obstacles: [],
+    powerUps: [],
     background: undefined,
     isDifficult: false,
+    isSlowDown: false,
+    isInvulnerable: false,
+    isQuickShoot: false,
+
 
 
     init() {
@@ -46,35 +58,55 @@ const Game = {
             this.checkCollision()
             this.clearBullets()
             this.framesCounter++
-            if (this.framesCounter % 30 === 0) {
+
+            if (this.framesCounter % this.shootFrequency === 0) {
                 this.plane.cooldown++
                 this.score++
             }
+            if (this.framesCounter % 60 === 0 && this.isInvulnerable === true) this.invulnerable--
+            if (this.framesCounter % 60 === 0 && this.isSlowDown === true) this.slowDown--
+            if (this.framesCounter % 60 === 0 && this.isQuickShoot === true) this.quickShoot--
+
+
             this.printScoreAndLives()
         }, 1000 / this.FPS)
     },
 
     generateAll() {
-        let planeLives = 3
+        let planeLives = 4
         let bossLives = 10
         if (this.isDifficult) {
-            planeLives = 1
+            planeLives = 2
             bossLives = 20
         }
         this.plane = new Plane(this.ctx, this.width, this.height, planeLives)
         this.obstacle = new Obstacle(this.ctx, this.width, this.height)
         this.meteorite = new Meteorite(this.ctx, this.width, this.height)
+        this.powerUp = new PowerUp(this.ctx, this.width, this.height)
         this.boss = new Boss(this.ctx, this.width, this.height, bossLives)
     },
 
     drawAll() {
         this.plane.bullets.forEach(bullet => bullet.draw());
         this.plane.draw()
-        if (this.score >= 200) {
+        if (this.score >= this.scoreFinalBoss) {
             this.boss.draw()
+            this.boss.powerDowns.forEach(powerDown => powerDown.draw())
         }
         this.obstacles.forEach(obstacle => obstacle.draw())
         this.meteorites.forEach(meteorite => meteorite.draw())
+        this.powerUps.forEach(powerUp => powerUp.draw())
+
+        if (this.invulnerable <= 0) this.isInvulnerable = false
+        if (this.slowDown <= 0) {
+            this.plane.movility = 10
+            this.plane.backMove = 7
+            this.isSlowDown = false
+        }
+        if (this.quickShoot <= 0) {
+            this.shootFrequency = 30
+            this.isQuickShoot = false
+        }
 
     },
 
@@ -82,74 +114,88 @@ const Game = {
         this.ctx.clearRect(0, 0, this.width, this.height)
         this.clearArray(this.obstacles)
         this.clearArray(this.meteorites)
+        this.clearArray(this.powerUps)
+        this.clearArray(this.boss.powerDowns)
+        console.log(this.boss.powerDowns)
+
+
     },
 
     setAllElements() {
         let velXObs = 0.3
         let velXMet = 0.4
-
         if (this.isDifficult) {
             velXObs = 0.6
             velXMet = 0.7
         }
+
         if (this.framesCounter % 120 === 0) {
-            this.score <= 200
+            this.score <= this.scoreFinalBoss
                 ?
                 this.obstacles.push(new Obstacle(this.ctx, this.width, this.height, this.obstacle.velX += velXObs))
                 :
                 this.obstacles.push(new Obstacle(this.ctx, this.width, this.height, this.obstacle.velX += velXObs, this.boss.posX))
         }
+
         if (this.framesCounter % 180 === 0) {
-            this.score <= 200
+            this.score <= this.scoreFinalBoss
                 ?
                 this.meteorites.push(new Meteorite(this.ctx, this.width, this.height, this.meteorite.velX += velXMet))
                 :
                 this.meteorites.push(new Meteorite(this.ctx, this.width, this.height, this.meteorite.velX += velXMet, this.boss.posX))
+
+            if (this.score >= this.scoreFinalBoss) {
+                this.boss.powerDowns.push(new PowerDown(this.ctx, this.boss.posX, this.boss.posY, this.boss.height))
+            }
         }
 
+        if (this.framesCounter % 360 === 0) {
+            let powerUpRandom = Math.floor(Math.random() * 2)
+            let powerUpType = ''
+
+            if (powerUpRandom === 0) { powerUpType = 'ExtraLife' } else { powerUpType = 'QuickShoot' }
+            this.powerUps.push(new PowerUp(this.ctx, this.width, this.height, powerUpType))
+        }
     },
 
-
-
     checkCollision() {
-        this.obstacles.forEach((obstacle, indexObstacle, obstacles) => {
-            if (obstacle.posX + 20 < this.plane.posX + this.plane.width &&
-                obstacle.posX + obstacle.width > this.plane.posX + 20 &&
-                obstacle.posY - 10 < this.plane.posY + this.plane.height &&
-                obstacle.height + obstacle.posY > this.plane.posY + 10) {
-
-                obstacles.splice(indexObstacle, 1)
-                this.plane.lives--
-                this.plane.posX -= 100
-
-                if (this.plane.lives <= 0) {
-                    this.gameOver()
-                }
-                /*if (obstacle.posX + this.obstacle.velX >= this.plane.posX + this.plane.width &&
-                    obstacle.posX <= this.plane.posX + this.plane.width &&
+        if (!this.isInvulnerable) {
+            this.obstacles.forEach((obstacle, indexObstacle, obstacles) => {
+                if (obstacle.posX + 20 < this.plane.posX + this.plane.width &&
+                    obstacle.posX + obstacle.width > this.plane.posX + 20 &&
                     obstacle.posY - 10 < this.plane.posY + this.plane.height &&
-                    obstacle.height + obstacle.posY > this.plane.posY + 10) {*/
-                //this.plane.lives--
-                //console.log(this.plane.lives)
-                //if (this.plane.lives <= 0) {  }
-            }
-        })
+                    obstacle.height + obstacle.posY > this.plane.posY + 10) {
 
-        this.meteorites.forEach((meteorite, indexMeteorite, meteorites) => {
-            if (meteorite.posX + 20 < this.plane.posX + this.plane.width &&
-                meteorite.posX + meteorite.width > this.plane.posX + 20 &&
-                meteorite.posY - 10 < this.plane.posY + this.plane.height &&
-                meteorite.height + meteorite.posY > this.plane.posY + 10) {
+                    obstacles.splice(indexObstacle, 1)
+                    this.plane.lives--
+                    this.plane.posX -= 50
+                    this.isInvulnerable = true
+                    this.invulnerable = 3
 
-                meteorites.splice(indexMeteorite, 1)
-                this.plane.lives--
-                this.plane.posX -= 100
-
-                if (this.plane.lives <= 0) {
-                    this.gameOver()
+                    if (this.plane.lives <= 0) {
+                        this.gameOver()
+                    }
                 }
-            }
-        })
+            })
+
+            this.meteorites.forEach((meteorite, indexMeteorite, meteorites) => {
+                if (meteorite.posX + 20 < this.plane.posX + this.plane.width &&
+                    meteorite.posX + meteorite.width > this.plane.posX + 20 &&
+                    meteorite.posY - 10 < this.plane.posY + this.plane.height &&
+                    meteorite.height + meteorite.posY > this.plane.posY + 10) {
+
+                    meteorites.splice(indexMeteorite, 1)
+                    this.plane.lives--
+                    this.plane.posX -= 50
+                    this.isInvulnerable = true
+                    this.invulnerable = 3
+
+                    if (this.plane.lives <= 0) {
+                        this.gameOver()
+                    }
+                }
+            })
+        }
 
         this.plane.bullets.forEach((bullet, indexBullet, bullets) => {
             this.meteorites.forEach((meteorite, indexMeteorite, meteorites) => {
@@ -175,7 +221,26 @@ const Game = {
             })
         })
 
-        if (this.score >= 200) {
+        this.powerUps.forEach((powerUp, indexPowerUp, powerUps) => {
+            if (powerUp.posX + 20 < this.plane.posX + this.plane.width &&
+                powerUp.posX + powerUp.width > this.plane.posX + 20 &&
+                powerUp.posY - 10 < this.plane.posY + this.plane.height &&
+                powerUp.height + powerUp.posY > this.plane.posY + 10) {
+                powerUps.splice(indexPowerUp, 1)
+
+                if (powerUp.name === 'ExtraLife') {
+                    this.plane.lives++
+                }
+                else if (powerUp.name === 'QuickShoot' && !this.isQuickShoot) {
+                    this.shootFrequency = 10
+                    this.isQuickShoot = true
+                    this.quickShoot = 3
+                }
+
+            }
+        })
+
+        if (this.score >= this.scoreFinalBoss) {
             this.plane.bullets.forEach((bullet, indexBullet, bullets) => {
                 if (bullet.posX + bullet.width + bullet.velX >= this.boss.posX &&
                     bullet.posX + bullet.width <= this.boss.posX &&
@@ -189,6 +254,23 @@ const Game = {
                     }
                 }
             })
+
+            // if (!this.isSlowDown) {
+            this.boss.powerDowns.forEach((powerDown, indexPowerDown, powerDowns) => {
+                if (powerDown.posX + 20 < this.plane.posX + this.plane.width &&
+                    powerDown.posX + powerDown.width > this.plane.posX + 20 &&
+                    powerDown.posY - 10 < this.plane.posY + this.plane.height &&
+                    powerDown.height + powerDown.posY > this.plane.posY + 10) {
+                    powerDowns.splice(indexPowerDown, 1)
+                    if (!this.isSlowDown) {
+                        this.plane.movility = 5
+                        this.plane.backMove = 3.5
+                        this.isSlowDown = true
+                        this.slowDown = 3
+                    }
+                }
+            })
+            // }
         }
     },
 

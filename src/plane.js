@@ -4,8 +4,8 @@ class Plane {
         this.ctxWidth = ctxWidth
         this.ctxHeight = ctxHeight
 
-        this.width = 200
-        this.height = 50
+        this.width = 220
+        this.height = 63
 
         this.posX = 100
         this.posY = ctxHeight / 2 - this.height
@@ -15,6 +15,8 @@ class Plane {
         this.cooldown = 1
         this.canShoot = false
         this.lives = lives
+        this.movility = 10
+        this.backMove = 7
 
         this.keys = {
             upKeyPressed: false,
@@ -26,6 +28,9 @@ class Plane {
 
         this.bullets = []
 
+        this.planeImg = new Image()
+        this.planeImg.src = "./assets/spitfire.png"
+
         this.init()
     }
 
@@ -34,8 +39,7 @@ class Plane {
     }
 
     draw() {
-        this.ctx.fillStyle = "black"
-        this.ctx.fillRect(this.posX, this.posY, this.width, this.height)
+        this.ctx.drawImage(this.planeImg, this.posX, this.posY, this.width, this.height)
 
         if (this.cooldown >= 1) this.canShoot = true
 
@@ -87,22 +91,22 @@ class Plane {
 
     moveUp() {
         if (this.posY > 50)
-            this.posY -= 10
+            this.posY -= this.movility
     }
 
     moveDown() {
         if (this.posY < this.ctxHeight - (this.height * 2) - this.pixelSetting)
-            this.posY += 10
+            this.posY += this.movility
     }
 
     moveRight() {
         if (this.posX < (this.ctxWidth / 2) - this.width)
-            this.posX += 10
+            this.posX += this.movility
     }
 
     moveLeft() {
         if (this.posX > 50)
-            this.posX -= 7
+            this.posX -= this.backMove
     }
 
     shoot() {
