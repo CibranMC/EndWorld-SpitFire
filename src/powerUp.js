@@ -6,8 +6,8 @@ class PowerUp {
 
         this.name = name
 
-        this.width = 50
-        this.height = 50
+        this.width = 65
+        this.height = 65
 
         this.posX = ctxWidth
         this.posY = Math.random() * (ctxHeight - (this.height + 50))
@@ -15,7 +15,7 @@ class PowerUp {
         this.velX = 14
 
         this.powerUpImg = new Image()
-        this.powerUpImg.src = this.name === 'ExtraLife' ? './assets/corazon.png' : './assets/balas.png'
+        this.powerUpImg.src = this.name === 'ExtraLife' ? './assets/heart.png' : './assets/bulletsPowerUp.png'
     }
 
     draw() {

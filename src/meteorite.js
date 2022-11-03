@@ -4,16 +4,16 @@ class Meteorite {
         this.ctxWidth = ctxWidth
         this.ctxHeight = ctxHeight
 
-        this.width = 100
-        this.height = 100
+        this.width = 125
+        this.height = 87
 
         this.posX = posX ? posX : ctxWidth
-        this.posY = Math.random() * (ctxHeight - (this.height + 50))
+        this.posY = Math.random() * (ctxHeight - (this.height + 150))
 
         this.velX = velX
 
         this.meteoriteImg = new Image()
-        this.meteoriteImg.src = "./assets/meteorito.png"
+        this.meteoriteImg.src = "./assets/meteorPixel.png"
     }
 
     draw() {

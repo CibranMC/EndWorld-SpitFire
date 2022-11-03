@@ -13,7 +13,7 @@ class Boss {
         this.posY = ctxHeight / 2 - this.height / 2
 
         this.bossImg = new Image()
-        this.bossImg.src = "./assets/Alien.png"
+        this.bossImg.src = "./assets/alien.png"
 
     }
 

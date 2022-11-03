@@ -11,45 +11,181 @@
 
 <body>
     <canvas class="non-display" id="canvas"></canvas>
-    <div class="game-over non-display">
-        <p class="score-title">
-            GAME OVER
-        </p>
-        <p class="score-points"></p>
-        <a class="reload-game-over"> Reload </a>
+    <div class="background background-game-over non-display">
+        <div class="x1">
+            <div class="meteor meteor1"></div>
+        </div>
+        <div class="x2">
+            <div class="meteor meteor2"></div>
+        </div>
+        <div class="x3">
+            <div class="meteor meteor3"></div>
+        </div>
+        <div class="x4">
+            <div class="meteor meteor4"></div>
+        </div>
+        <div class="x5">
+            <div class="meteor meteor5"></div>
+        </div>
+        <div class="x1">
+            <div class="meteor meteor6"></div>
+        </div>
+        <div class="x2">
+            <div class="meteor meteor7"></div>
+        </div>
+        <div class="x3">
+            <div class="meteor meteor8"></div>
+        </div>
+        <div class="x4">
+            <div class="meteor meteor9"></div>
+        </div>
+        <div class="x5">
+            <div class="meteor meteor10"></div>
+        </div>
+        <div class="x1">
+            <div class="meteor meteor11"></div>
+        </div>
+        <div class="x2">
+            <div class="meteor meteor12"></div>
+        </div>
+        <div class="x3">
+            <div class="meteor meteor13"></div>
+        </div>
+        <div class="game-over">
+            <p class="score-title">
+                GAME OVER
+            </p>
+            <p class="score-points"></p>
+            <button class="reload-game-over gamer-key-button-difficulty"> Reload </button>
+        </div>
     </div>
     <div class="win-game non-display">
         <p class="score-title">
-            GRACIAS ME HAS SALVADO LA VIDAAAAA! :D :D ETERNAMENTE AGRADESIDOOOOO
+            ME SALVASTE LA VIDA ETERNAMENTE AGRADECIDO
         </p>
+        <img class="alien-photo" src="./assets/Alien.png" alt="Alien" />
         <p class="score-points"></p>
-        <a class="reload-win-game"> Reload </a>
+        <button class="reload-win-game gamer-key-button-difficulty"> Reload </button>
     </div>
-
-    <div class="difficulty">
-        <div class="menu">
-            <a class="easy"> Easy </a>
-            <a class="hard"> Hard </a>
+    <div class="background background-main-page">
+        <div class="x1">
+            <div class="meteor meteor1"></div>
         </div>
-        <div class="controls">
-            <div class="control-buttons-top">
-                <div class="top-button">
-                    <p class="button-title">UP</p>
-                    <button class="button-54" role="button">▲</button>
+        <div class="x2">
+            <div class="meteor meteor2"></div>
+        </div>
+        <div class="x3">
+            <div class="meteor meteor3"></div>
+        </div>
+        <div class="x4">
+            <div class="meteor meteor4"></div>
+        </div>
+        <div class="x5">
+            <div class="meteor meteor5"></div>
+        </div>
+        <div class="x1">
+            <div class="meteor meteor6"></div>
+        </div>
+        <div class="x2">
+            <div class="meteor meteor7"></div>
+        </div>
+        <div class="x3">
+            <div class="meteor meteor8"></div>
+        </div>
+        <div class="x4">
+            <div class="meteor meteor9"></div>
+        </div>
+        <div class="x5">
+            <div class="meteor meteor10"></div>
+        </div>
+        <div class="x1">
+            <div class="meteor meteor11"></div>
+        </div>
+        <div class="x2">
+            <div class="meteor meteor12"></div>
+        </div>
+        <div class="x3">
+            <div class="meteor meteor13"></div>
+        </div>
+        <div class="difficulty">
+            <div class="menu">
+                <h1 class="game-title">ENDWORLD <br />SPITFIRE</h1>
+                <div class="gamer-key-button-difficulty-container">
+                    <button class="easy gamer-key-button-difficulty" role="button">Easy</button>
+                    <button class="hard gamer-key-button-difficulty" role="button">Hard</button>
                 </div>
             </div>
-            <div class="control-buttons">
-                <div class="button">
-                    <p class="button-title">LEFT</p>
-                    <button class="button-54" role="button">◄</button>
+            <div class="controls">
+                <div class="controls-flex">
+                    <div>
+                        <div class="control-buttons-top">
+                            <div class="top-button">
+                                <p class="button-title">UP</p>
+                                <button class="gamer-key-button" role="button">▲</button>
+                            </div>
+                        </div>
+                        <div class="control-buttons">
+                            <div class="button">
+                                <p class="button-title">LEFT</p>
+                                <button class="gamer-key-button" role="button">◄</button>
+                            </div>
+                            <div class="button">
+                                <p class="button-title">DOWN</p>
+                                <button class="gamer-key-button" role="button">▼</button>
+                            </div>
+                            <div class="button">
+                                <p class="button-title">RIGHT</p>
+                                <button class="gamer-key-button" role="button">►</button>
+                            </div>
+                        </div>
+                    </div>
+                    <h1 class="control-buttons-text">OR</h1>
+                    <div>
+                        <div class="control-buttons-top">
+                            <div class="top-button">
+                                <p class="button-title">UP</p>
+                                <button class="gamer-key-button" role="button">W</button>
+                            </div>
+                        </div>
+                        <div class="control-buttons">
+                            <div class="button">
+                                <p class="button-title">LEFT</p>
+                                <button class="gamer-key-button" role="button">A</button>
+                            </div>
+                            <div class="button">
+                                <p class="button-title">DOWN</p>
+                                <button class="gamer-key-button" role="button">S</button>
+                            </div>
+                            <div class="button">
+                                <p class="button-title">RIGHT</p>
+                                <button class="gamer-key-button" role="button">D</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="button">
-                    <p class="button-title">DOWN</p>
-                    <button class="button-54" role="button">▼</button>
+                    <p class="button-title button-title-space">SHOOT</p>
+                    <button class="gamer-key-button gamer-space-button" role="button">SPACE</button>
                 </div>
-                <div class="button">
-                    <p class="button-title">RIGHT</p>
-                    <button class="button-54" role="button">►</button>
+            </div>
+            <div class="power-cotainer">
+                <div class="power-up">
+                    <h1 class="power-title">POWER UP ITEMS</h1>
+                    <div class="power-row">
+                        <img class="image-power" src="./assets/heart.png">
+                        <span>EXTRALIFE</span>
+                    </div>
+                    <div class="power-row">
+                        <img class="image-power" src="./assets/bulletsPowerUp.png">
+                        <span>QUICKSHOOT</span>
+                    </div>
+                </div>
+                <div class="power-down">
+                    <h1 class="power-title">NERF ITEMS</h1>
+                    <div class="power-row">
+                        <img class="image-power" src="./assets/freezePowerDown.png">
+                        <span>SLOWDOWN</span>
+                    </div>
                 </div>
             </div>
         </div>

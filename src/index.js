@@ -3,7 +3,7 @@ window.onload = () => {
     const easy = document.querySelector(".easy")
     const hard = document.querySelector(".hard")
 
-    const menu = document.querySelector(".difficulty")
+    const menu = document.querySelector(".background-main-page")
 
     easy.addEventListener('click', () => {
         menu.classList.toggle("non-display")

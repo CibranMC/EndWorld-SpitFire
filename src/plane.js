@@ -116,5 +116,4 @@ class Plane {
             this.cooldown = 0
         }
     }
-
 }

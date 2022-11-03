@@ -1,16 +1,16 @@
 class Bullet {
     constructor(ctx, planePosX, planePosY, planeWidth, planeHeight) {
         this.ctx = ctx
-        this.posX = planePosX + planeWidth - 60
+        this.posX = planePosX + planeWidth - 70
         this.posY = planePosY + 14 + planeHeight / 2
 
-        this.width = 15
-        this.height = 8
+        this.width = 50
+        this.height = 50
 
         this.velX = 15
 
         this.bulletImg = new Image()
-        this.bulletImg.src = "./assets/bala-spitfire.png"
+        this.bulletImg.src = "./assets/bulletPixel.png"
     }
 
     draw() {

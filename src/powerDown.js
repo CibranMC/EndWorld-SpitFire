@@ -12,7 +12,7 @@ class PowerDown {
         this.velX = 20
 
         this.powerDownImg = new Image()
-        this.powerDownImg.src = "./assets/congelacion.png"
+        this.powerDownImg.src = "./assets/freezePowerDown.png"
     }
 
 

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Awesome-mod';
+    src: url('../fonts/28_Days_Later.ttf');
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -18,14 +23,149 @@ body {
     margin-top: 40px;
 }
 
+/* KEYFRAMES */
+
+@-webkit-keyframes animatedMeteor {
+    0% {
+        margin-top: -700px;
+    }
+
+    100% {
+        margin-bottom: 100%;
+    }
+}
+
+@-moz-keyframes animatedMeteor {
+    0% {
+        margin-top: -700px;
+    }
+
+    100% {
+        margin-top: 100%;
+    }
+}
+
+@keyframes animatedMeteor {
+    0% {
+        margin-top: -700px;
+    }
+
+    100% {
+        margin-top: 100%;
+    }
+}
+
+/* ANIMATIONS */
+
+.x1 {
+    position: absolute;
+    -webkit-animation: animatedMeteor 14s linear infinite;
+    -moz-animation: animatedMeteor 14s linear infinite;
+    animation: animatedMeteor 14s linear infinite;
+}
+
+.x2 {
+    position: absolute;
+    -webkit-animation: animatedMeteor 10s linear infinite;
+    -moz-animation: animatedMeteor 10s linear infinite;
+    animation: animatedMeteor 10s linear infinite;
+}
+
+.x3 {
+    position: absolute;
+    -webkit-animation: animatedMeteor 8s linear infinite;
+    -moz-animation: animatedMeteor 8s linear infinite;
+    animation: animatedMeteor 8s linear infinite;
+}
+
+.x4 {
+    position: absolute;
+    -webkit-animation: animatedMeteor 7s linear infinite;
+    -moz-animation: animatedMeteor 7s linear infinite;
+    animation: animatedMeteor 7s linear infinite;
+}
+
+.x5 {
+    position: absolute;
+    -webkit-animation: animatedMeteor 13s linear infinite;
+    -moz-animation: animatedMeteor 13s linear infinite;
+    animation: animatedMeteor 13s linear infinite;
+}
+
+.meteor {
+    background: url(../assets/meteorito.png)no-repeat;
+    background-size: cover;
+    height: 100px;
+    position: absolute;
+    width: 100px;
+}
+
+.meteor1 {
+    left: 200px;
+}
+
+.meteor2 {
+    left: 375px;
+}
+
+.meteor3 {
+    left: 460px;
+}
+
+.meteor4 {
+    left: 60px;
+}
+
+.meteor5 {
+    left: 750px;
+}
+
+.meteor6 {
+    left: 890px;
+}
+
+.meteor7 {
+    left: 1020px;
+}
+
+.meteor8 {
+    left: 1100px;
+}
+
+.meteor9 {
+    left: 1280px;
+}
+
+.meteor10 {
+    left: 1480px;
+}
+
+.meteor11 {
+    left: 1580px;
+}
+
+.meteor12 {
+    left: 1700px;
+}
+
+.meteor13 {
+    left: 1850px;
+}
+
 .easy {
     margin-right: 20px;
 }
 
-.difficulty {
-    display: flex;
+.background {
     width: 100vw;
     height: 100vh;
+    background-color: #5C4770;
+}
+
+.difficulty {
+    display: flex;
+    width: 100%;
+    height: 100%;
     align-items: center;
     justify-content: center;
 }
@@ -37,9 +177,15 @@ body {
     padding: 20px 40px;
 }
 
-.button-54 {
+.controls-flex {
+    display: flex;
+    align-items: center;
+}
+
+.gamer-key-button {
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
+    font-weight: bold;
     width: 40px;
     letter-spacing: 2px;
     text-decoration: none;
@@ -55,10 +201,55 @@ body {
     touch-action: manipulation;
 }
 
-.button-54:hover {
+.game-title {
+    font-family: "Awesome-mod";
+    font-weight: bold;
+    font-size: 80px;
+    text-align: center;
+    position: relative;
+}
+
+.gamer-key-button-difficulty-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gamer-key-button-difficulty {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
+    cursor: pointer;
+    border: 3px solid;
+    padding: 0.25em 0.5em;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.gamer-key-button:hover,
+.gamer-key-button-difficulty:hover {
     box-shadow: 0px 0px 0px 0px;
     top: 5px;
     left: 5px;
+}
+
+.gamer-space-button {
+    width: 100%
+}
+
+.control-buttons-text {
+    font-family: "Open Sans", sans-serif;
+    font-size: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+
 }
 
 .control-buttons {
@@ -69,8 +260,13 @@ body {
 .button-title {
     width: 40px;
     text-align: center;
+    font-weight: bold;
     font-family: "Open Sans", sans-serif;
     font-size: 14px;
+}
+
+.button-title-space {
+    width: 100%
 }
 
 .button {
@@ -90,14 +286,24 @@ body {
 .score-title,
 .score-points {
     font-size: 50px;
-    font-family: sans-serif;
+    font-family: 'Awesome-mod';
     color: black;
     text-align: center;
+    z-index: 1;
 }
 
-.game-over,
+.game-over {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .win-game {
     position: absolute;
+    background-color: #5C4770;
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -106,6 +312,42 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.alien-photo {
+    position: absolute;
+    height: 100vh;
+    right: 0;
+}
+
+.power-cotainer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 20px 40px;
+}
+
+.power-row {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 10px;
+}
+
+.power-row span {
+    font-family: "Awesome-mod";
+    font-size: 30px;
+}
+
+.power-title {
+    font-family: "Awesome-mod";
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.image-power {
+    width: 40px;
+    margin-right: 10px;
 }
 
 .non-display {

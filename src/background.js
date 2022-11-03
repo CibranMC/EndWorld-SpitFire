@@ -11,13 +11,15 @@ class Background {
         this.velX = 5
 
         this.backgroundImg = new Image()
-        this.backgroundImg.src = "./assets/peakpx.jpg"
+        this.backgroundImg.src = "./assets/fondo1.png"
 
         this.x = 0
         this.x2 = ctxWidth
     }
 
     draw() {
+        this.ctx.fillStyle = "#5C4770"
+        this.ctx.fillRect(this.posX, this.posY, this.width, this.height)
         this.ctx.drawImage(this.backgroundImg, this.x, this.posY, this.width, this.height)
         this.ctx.drawImage(this.backgroundImg, this.x2, this.posY, this.width, this.height)
 
@@ -26,8 +28,6 @@ class Background {
 
         if (this.x2 < - this.ctxWidth) this.x2 = this.ctxWidth + this.x - this.velX
         else this.x2 -= this.velX
-
-        // this.move()
     }
 
     move() {

@@ -68,7 +68,6 @@ const Game = {
             if (this.framesCounter % 60 === 0 && this.isSlowDown === true) this.slowDown--
             if (this.framesCounter % 60 === 0 && this.isQuickShoot === true) this.quickShoot--
 
-
             this.printScoreAndLives()
         }, 1000 / this.FPS)
     },
@@ -86,13 +85,10 @@ const Game = {
         this.powerUp = new PowerUp(this.ctx, this.width, this.height)
         this.boss = new Boss(this.ctx, this.width, this.height, bossLives)
         this.background = new Background(this.ctx, this.width, this.height)
-
     },
 
     drawAll() {
         this.background.draw()
-        console.log(this.background)
-
         this.plane.bullets.forEach(bullet => bullet.draw());
         this.plane.draw()
         if (this.score >= this.scoreFinalBoss) {
@@ -113,7 +109,6 @@ const Game = {
             this.shootFrequency = 30
             this.isQuickShoot = false
         }
-
     },
 
     clearAll() {
@@ -122,9 +117,6 @@ const Game = {
         this.clearArray(this.meteorites)
         this.clearArray(this.powerUps)
         this.clearArray(this.boss.powerDowns)
-        // console.log(this.boss.powerDowns)
-
-
     },
 
     setAllElements() {
@@ -242,7 +234,6 @@ const Game = {
                     this.isQuickShoot = true
                     this.quickShoot = 3
                 }
-
             }
         })
 
@@ -261,7 +252,6 @@ const Game = {
                 }
             })
 
-            // if (!this.isSlowDown) {
             this.boss.powerDowns.forEach((powerDown, indexPowerDown, powerDowns) => {
                 if (powerDown.posX + 20 < this.plane.posX + this.plane.width &&
                     powerDown.posX + powerDown.width > this.plane.posX + 20 &&
@@ -276,7 +266,6 @@ const Game = {
                     }
                 }
             })
-            // }
         }
     },
 
@@ -286,7 +275,6 @@ const Game = {
                 items.splice(i, 1)
             }
         })
-        //console.log(array)
     },
 
     clearBullets() {
@@ -295,7 +283,6 @@ const Game = {
                 bullets.splice(i, 1)
             }
         })
-        //console.log(this.plane.bullets)
     },
 
     printScoreAndLives() {
@@ -325,7 +312,7 @@ const Game = {
     },
 
     gameOver() {
-        const gameOver = document.querySelector(".game-over")
+        const gameOver = document.querySelector(".background-game-over")
         const scorePoints = document.querySelector(".score-points")
         const reload = document.querySelector(".reload-game-over")
 
