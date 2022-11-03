@@ -27,6 +27,7 @@ const Game = {
     obstacles: [],
     powerUps: [],
     background: undefined,
+
     isDifficult: false,
     isSlowDown: false,
     isInvulnerable: false,
@@ -84,9 +85,14 @@ const Game = {
         this.meteorite = new Meteorite(this.ctx, this.width, this.height)
         this.powerUp = new PowerUp(this.ctx, this.width, this.height)
         this.boss = new Boss(this.ctx, this.width, this.height, bossLives)
+        this.background = new Background(this.ctx, this.width, this.height)
+
     },
 
     drawAll() {
+        this.background.draw()
+        console.log(this.background)
+
         this.plane.bullets.forEach(bullet => bullet.draw());
         this.plane.draw()
         if (this.score >= this.scoreFinalBoss) {
@@ -116,7 +122,7 @@ const Game = {
         this.clearArray(this.meteorites)
         this.clearArray(this.powerUps)
         this.clearArray(this.boss.powerDowns)
-        console.log(this.boss.powerDowns)
+        // console.log(this.boss.powerDowns)
 
 
     },
