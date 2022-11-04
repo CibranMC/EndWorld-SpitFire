@@ -18,7 +18,7 @@ const Game = {
     gameOverAudio: undefined,
 
     shootFrequency: 30,
-    scoreFinalBoss: 100,
+    scoreFinalBoss: 175,
     invulnerable: 0,
     slowDown: 0,
     quickShoot: 0,
