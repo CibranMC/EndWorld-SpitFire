@@ -4,8 +4,8 @@ class Background {
         this.ctxWidth = ctxWidth
         this.ctxHeight = ctxHeight
 
-        this.width = 1920
-        this.height = 937
+        this.width = ctxWidth
+        this.height = ctxHeight
         this.posX = 0
         this.posY = 0
         this.velX = 5

@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Awesome-mod';
-    src: url('../fonts/28_Days_Later.ttf');
+    src: url('../fonts/Wall-Painter.ttf');
 }
 
 * {
@@ -55,6 +55,36 @@ body {
     }
 }
 
+@-webkit-keyframes animatedPlane {
+    0% {
+        margin-left: -700px;
+    }
+
+    100% {
+        margin-left: calc(50% - 68.75px);
+    }
+}
+
+@-moz-keyframes animatedPlane {
+    0% {
+        margin-left: -700px;
+    }
+
+    100% {
+        margin-left: calc(50% - 68.75px);
+    }
+}
+
+@keyframes animatedPlane {
+    0% {
+        margin-left: -700px;
+    }
+
+    100% {
+        margin-left: calc(50% - 68.75px);
+    }
+}
+
 /* ANIMATIONS */
 
 .x1 {
@@ -90,6 +120,22 @@ body {
     -webkit-animation: animatedMeteor 13s linear infinite;
     -moz-animation: animatedMeteor 13s linear infinite;
     animation: animatedMeteor 13s linear infinite;
+}
+
+.plane-move {
+    position: absolute;
+    -webkit-animation: animatedPlane 7s linear forwards;
+    -moz-animation: animatedPlane 7s linear forwards;
+    animation: animatedPlane 7s linear forwards;
+}
+
+.plane {
+    background: url(../assets/spitfire.png)no-repeat;
+    background-size: cover;
+    height: 39.5px;
+    position: absolute;
+    width: 137.5px;
+    margin-top: 31vh;
 }
 
 .meteor {

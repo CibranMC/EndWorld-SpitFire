@@ -4,8 +4,8 @@ class Obstacle {
         this.ctxWidth = ctxWidth
         this.ctxHeight = ctxHeight
 
-        this.width = 127
-        this.height = 418
+        this.width = 106
+        this.height = 349
 
         this.posX = posX ? posX : ctxWidth
         this.posY = Math.random() * (ctxHeight - (this.height + 50))

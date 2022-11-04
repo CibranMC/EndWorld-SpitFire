@@ -14,9 +14,11 @@ const Game = {
     intervalId: undefined,
     framesCounter: 0,
     score: 0,
+    winAudio: undefined,
+    gameOverAudio: undefined,
 
     shootFrequency: 30,
-    scoreFinalBoss: 200,
+    scoreFinalBoss: 100,
     invulnerable: 0,
     slowDown: 0,
     quickShoot: 0,
@@ -85,6 +87,8 @@ const Game = {
         this.powerUp = new PowerUp(this.ctx, this.width, this.height)
         this.boss = new Boss(this.ctx, this.width, this.height, bossLives)
         this.background = new Background(this.ctx, this.width, this.height)
+        this.winAudio = new Audio("./assets/Eternamente_agradecidos.mp3")
+        this.gameOverAudio = new Audio("./assets/El_gancho.mp3")
     },
 
     drawAll() {
@@ -239,15 +243,15 @@ const Game = {
 
         if (this.score >= this.scoreFinalBoss) {
             this.plane.bullets.forEach((bullet, indexBullet, bullets) => {
-                if (bullet.posX + bullet.width + bullet.velX >= this.boss.posX &&
-                    bullet.posX + bullet.width <= this.boss.posX &&
+                if (bullet.posX + bullet.width - 150 + bullet.velX >= this.boss.posX &&
+                    bullet.posX + bullet.width <= this.boss.posX + 150 &&
                     this.boss.posY < bullet.posY + bullet.height &&
                     this.boss.height + this.boss.posY > bullet.posY) {
                     bullets.splice(indexBullet, 1)
                     this.boss.lives--
                     if (this.boss.lives <= 0) {
-                        this.winGame()
                         this.score += 50
+                        this.winGame()
                     }
                 }
             })
@@ -287,7 +291,7 @@ const Game = {
 
     printScoreAndLives() {
         this.ctx.fillStyle = "black"
-        this.ctx.font = "35px sans-serif"
+        this.ctx.font = "35px Awesome-mod"
 
         this.ctx.fillText(`Score: ${this.score}`, this.width - 250, 40)
         this.ctx.fillText(`Lives: ${this.plane.lives}`, 100, 40)
@@ -295,8 +299,9 @@ const Game = {
 
     winGame() {
         const winGame = document.querySelector(".win-game")
-        const scorePoints = document.querySelector(".score-points")
+        const scorePoints = document.querySelector(".score-points-win")
         const reload = document.querySelector(".reload-win-game")
+        this.winAudio.play()
 
         clearInterval(this.intervalId)
         this.clearAll()
@@ -313,8 +318,9 @@ const Game = {
 
     gameOver() {
         const gameOver = document.querySelector(".background-game-over")
-        const scorePoints = document.querySelector(".score-points")
+        const scorePoints = document.querySelector(".score-points-game-over")
         const reload = document.querySelector(".reload-game-over")
+        this.gameOverAudio.play()
 
         clearInterval(this.intervalId)
         this.clearAll()
@@ -328,5 +334,4 @@ const Game = {
             location.reload()
         })
     }
-
 }
